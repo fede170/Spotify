@@ -1,14 +1,23 @@
 package modelo;
 
+import javax.persistence.*;
 
+
+@Entity
 public class Album {
-
+    
+    @Id
+    @SequenceGenerator(name = "sec_album", initialValue = 1, allocationSize = 1)//Esto es un auto incremental para el id de la base de datos
+    @GeneratedValue(strategy =  GenerationType.SEQUENCE, generator = "sec_album")
+    
     private Long id;//id no va a tener geters ni seters por cuetiones de seguridad
     
     private String nombre;
     
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Artista artista;
     
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Spotify spotify;
     
     
